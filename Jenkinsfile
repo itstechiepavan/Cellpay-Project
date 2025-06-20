@@ -32,10 +32,10 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    echo "Running Docker Container on port 5001..."
+                    echo "Running Docker Container on port 5002..."
                     sh '''
                         docker rm -f cellpay-container || true
-                        docker run -d -p 5001:5000 --name cellpay-container cellpay-app
+                        docker run -d -p 5002:5002 --name cellpay-container cellpay-app
                     '''
                 }
             }
