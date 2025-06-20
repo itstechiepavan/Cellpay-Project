@@ -10,33 +10,23 @@ pipeline {
 
         stage('Install Requirements') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install -r Practice-Project---Cellpay/requirements.txt'
             }
         }
 
         stage('Run Flask App') {
             steps {
-                sh 'nohup python3 app.py &'
+                sh 'nohup python3 Practice-Project---Cellpay/app.py &'
             }
         }
 
         stage('Docker Build') {
             steps {
-                script {
-                    echo "Building Docker Image..."
-                    sh 'docker build -t cellpay-app .'
-                }
-            }
-        }
-
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    echo "Running Docker Container..."
-                    // Optional: remove old container if already exists
-                    sh 'docker rm -f cellpay-container || true'
-                    // Start new container
-                    sh 'docker run -d -p 5000:5000 --name cellpay-container cellpay-app'
+                dir('Practice-Project---Cellpay') {
+                    script {
+                        echo "Building Docker Image..."
+                        sh 'docker build -t cellpay-app .'
+                    }
                 }
             }
         }
