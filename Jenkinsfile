@@ -28,5 +28,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    echo "Running Docker Container..."
+                    sh '''
+                        docker rm -f cellpay-container || true
+                        docker run -d -p 5000:5000 --name cellpay-container cellpay-app
+                    '''
+                }
+            }
+        }
     }
 }
