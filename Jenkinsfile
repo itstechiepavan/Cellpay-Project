@@ -28,6 +28,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    echo "Running Docker Container..."
+                    // Optional: remove old container if already exists
+                    sh 'docker rm -f cellpay-container || true'
+                    // Start new container
+                    sh 'docker run -d -p 5000:5000 --name cellpay-container cellpay-app'
+                }
+            }
+        }
     }
 }
-
