@@ -14,12 +14,6 @@ pipeline {
             }
         }
 
-        stage('Run Flask App') {
-            steps {
-                sh 'nohup python3 app.py &'
-            }
-        }
-
         stage('Docker Build') {
             steps {
                 script {
